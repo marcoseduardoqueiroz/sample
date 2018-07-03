@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Gas and Electricity Estimate
+  description: Gives an estimate as to how much usage of gas and electricity services for a particular customer.   
+host: private-333802-estimate.apiary-mock.com
+basePath: /api
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /estimate/4859634:
+    x-summary: Estimate Next Month 4859634
+    x-description: |
+        Returns gas and electricity estimate for the next month for the account number: 4859634. 
+    get:
+      responses:
+        200:
+          description: Gas & Electricity estimate for the next month
+          examples:
+            application/json:
+                [
+        					{
+								"account_number": "4859634",
+								"name": "Darko",
+								"gas_estimate_Estimate": "32,000 Btu",
+								"gas_estimate_cost": "¥ 63,322",
+								"electricity_estimate_Estimate": "5,325 kW",
+								"electricity_estimate_cost": "¥ 18,324",
+								"environment": "Japan 1"								
+        					}
+        				]
+          schema:
+            $ref: '#/definitions/Estimate'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    
+   
+  /estimate/5845241:
+    x-summary: Estimate Next Month 5845241
+    x-description: |
+        Returns gas and electricity Estimate of current month for the account number: 5845241.     
+    get:
+      responses:
+        200:
+          description: Gas & Electricity Estimate response for current month
+          examples:
+            application/json:
+                [
+        					{
+								"account_number": "5845241",
+								"name": "John",
+								"gas_estimate_usage": "480,000 Btu",
+								"gas_estimate_cost": "¥ 306,424",
+								"electricity_estimate_usage": "0 kW",
+								"electricity_estimate_cost": "¥ 0",
+								"environment": "Japan 1"								
+        					}
+        				]
+          schema:
+            $ref: '#/definitions/Estimate'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'                 
+definitions:
+  Estimate:
+    required:
+      - account_number
+    properties:
+      account_number:
+        type: string
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
